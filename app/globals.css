@@ -1,0 +1,13 @@
+@import "tailwindcss";
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%) scaleX(0);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: translateX(200%) scaleX(0);
+  }
+}

@@ -1,0 +1,36 @@
+name: Update GitHub Data
+
+on:
+  schedule:
+    - cron: "0 0 */3 * *" # Runs every 3 days
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  update-data:
+    permissions:
+      contents: read
+      issues: read
+      discussions: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up devkit
+        uses: sablier-labs/devkit/actions/setup@main
+        with:
+          package-manager: "bun"
+
+      - name: Fetch new data
+        run: just fetch-data
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          body: "This PR updates the `github-data.json` file with the latest data from GitHub."
+          branch: "update-github-data"
+          commit-message: "chore(data): update github-data.json"
+          delete-branch: true
+          title: "Update github-data.json"
+          token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,34 @@
+{
+  "name": "@sablier/github-searcher",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "dayjs": "^1.11.13",
+    "flexsearch": "^0.8.205",
+    "next": "15.3.3",
+    "react": "^19.0",
+    "react-dom": "^19.0",
+    "react-markdown": "^10.1.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.1.2",
+    "@octokit/openapi-types": "^25.1.0",
+    "@sablier/devkit": "github:sablier-labs/devkit#main",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.4",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.4",
+    "typescript": "^5",
+    "vercel": "^45.0.9"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
