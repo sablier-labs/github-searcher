@@ -22,6 +22,8 @@ jobs:
           package-manager: "bun"
 
       - name: Fetch new data
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: just fetch-data
 
       - name: Generate timestamps
