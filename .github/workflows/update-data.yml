@@ -7,10 +7,6 @@ on:
 
 jobs:
   update-data:
-    permissions:
-      contents: write
-      discussions: read
-      issues: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -21,16 +17,23 @@ jobs:
         with:
           package-manager: "bun"
 
+      - name: Get app installation token
+        id: app-token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Fetch new data
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APP_TOKEN: ${{ steps.app-token.outputs.token }}
         run: just fetch-data
 
       - name: Generate timestamps
         id: timestamps
         run: | # shell
           echo "unix=$(date +%s)" >> $GITHUB_OUTPUT
-          echo "human=$(date '+%B %d, %Y')" >> $GITHUB_OUTPUT
+          echo "human=$(date '+%B %d, %Y at %H:%M UTC')" >> $GITHUB_OUTPUT
 
       - name: Commit changes
         run: | # shell

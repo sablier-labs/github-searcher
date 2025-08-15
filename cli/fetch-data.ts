@@ -5,18 +5,19 @@ import dayjs from "dayjs";
 import { REPOSITORIES } from "../app/lib/repositories";
 import type { DiscussionQueryResponse, Repository, SearchResult } from "../app/lib/types";
 
+const APP_TOKEN = process.env.APP_TOKEN;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const PUBLIC_DIR = join(process.cwd(), "public");
-const DATA_FILE = join(PUBLIC_DIR, "github-data.json");
-
-if (!GITHUB_TOKEN) {
-  console.error("❌ GITHUB_TOKEN environment variable is required");
+if (!APP_TOKEN && !GITHUB_TOKEN) {
+  console.error("❌ APP_TOKEN or GITHUB_TOKEN environment variable is required");
   process.exit(1);
 }
 
 const octokit = new Octokit({
-  auth: GITHUB_TOKEN,
+  auth: APP_TOKEN || GITHUB_TOKEN,
 });
+
+const PUBLIC_DIR = join(process.cwd(), "public");
+const DATA_FILE = join(PUBLIC_DIR, "github-data.json");
 
 // GraphQL query for fetching repository discussions
 const DISCUSSIONS_QUERY = `#graphql

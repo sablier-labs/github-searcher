@@ -14,6 +14,7 @@ bun := require("bun")
 #                               ENVIRONMENT VARS                               #
 # ---------------------------------------------------------------------------- #
 
+APP_TOKEN := env("APP_TOKEN", "")
 GITHUB_TOKEN := env("GITHUB_TOKEN", "")
 
 # ---------------------------------------------------------------------------- #
@@ -26,7 +27,9 @@ default:
 
 # Fetch the data from GitHub (issues and discussions)
 fetch-data:
-    GITHUB_TOKEN={{ GITHUB_TOKEN }} na tsx cli/fetch-data.ts
+    APP_TOKEN={{ APP_TOKEN }} \
+    GITHUB_TOKEN={{ GITHUB_TOKEN }} \
+    na tsx cli/fetch-data.ts
 
 # Clean the .next directory
 clean:
