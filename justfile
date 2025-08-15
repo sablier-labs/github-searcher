@@ -1,11 +1,20 @@
 # See https://github.com/sablier-labs/devkit/blob/main/just/base.just
 import "./node_modules/@sablier/devkit/just/base.just"
+
+
 # ---------------------------------------------------------------------------- #
 #                                 DEPENDENCIES                                 #
 # ---------------------------------------------------------------------------- #
 
 # Bun: https://github.com/oven-sh/bun
 bun := require("bun")
+
+
+# ---------------------------------------------------------------------------- #
+#                               ENVIRONMENT VARS                               #
+# ---------------------------------------------------------------------------- #
+
+GITHUB_TOKEN := env("GITHUB_TOKEN")
 
 # ---------------------------------------------------------------------------- #
 #                                    RECIPES                                   #
@@ -17,7 +26,7 @@ default:
 
 # Fetch the data from GitHub (issues and discussions)
 fetch-data:
-    na tsx cli/fetch-data.ts
+    GITHUB_TOKEN={{ GITHUB_TOKEN }} na tsx cli/fetch-data.ts
 
 # Clean the .next directory
 clean:
