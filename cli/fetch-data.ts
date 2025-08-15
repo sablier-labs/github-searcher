@@ -169,7 +169,7 @@ async function fetchData() {
     issues,
   };
 
-  const stringifiedData = JSON.stringify(data, null, 2);
+  const stringifiedData = JSON.stringify(data);
   await fs.writeFile(DATA_FILE, stringifiedData);
 
   console.log("\n📊 Data index statistics:");

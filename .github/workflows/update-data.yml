@@ -9,8 +9,8 @@ jobs:
   update-data:
     permissions:
       contents: write
-      issues: read
       discussions: read
+      issues: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,3 +39,8 @@ jobs:
           git add public/github-data.json
           git diff --staged --quiet || git commit -m "chore: update data - ${{ steps.timestamps.outputs.human }}"
           git push
+
+      - name: "Add summary"
+        run: | # shell
+          echo "## Update result" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Passed" >> $GITHUB_STEP_SUMMARY
