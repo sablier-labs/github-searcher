@@ -13,11 +13,14 @@ export default function ContentTypeSelector({
 }: ContentTypeSelectorProps) {
   return (
     <div className="mb-6">
-      <label htmlFor="content-type" className="block text-lg font-semibold text-gray-800 mb-3">
+      <label
+        htmlFor="content-type"
+        className="block text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3"
+      >
         Content Type
       </label>
       <div className="flex gap-6">
-        <label className="flex items-center text-base">
+        <label className="flex items-center text-base text-gray-700 dark:text-gray-300">
           <input
             type="radio"
             value="both"
@@ -28,7 +31,7 @@ export default function ContentTypeSelector({
           />
           Both
         </label>
-        <label className="flex items-center text-base">
+        <label className="flex items-center text-base text-gray-700 dark:text-gray-300">
           <input
             type="radio"
             value="issues"
@@ -39,7 +42,7 @@ export default function ContentTypeSelector({
           />
           Issues
         </label>
-        <label className="flex items-center text-base">
+        <label className="flex items-center text-base text-gray-700 dark:text-gray-300">
           <input
             type="radio"
             value="discussions"

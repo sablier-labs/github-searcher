@@ -52,7 +52,7 @@ export default function SearchBar({ loading, onSearch }: SearchBarProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-lg shadow-lg p-8 border border-gray-200"
+      className="bg-white dark:bg-slate-800 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-slate-700"
     >
       <SearchInput
         query={query}

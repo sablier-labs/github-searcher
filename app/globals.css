@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
 @keyframes loading {
   0% {
     transform: translateX(-100%) scaleX(0);

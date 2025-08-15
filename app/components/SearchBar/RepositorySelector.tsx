@@ -38,19 +38,24 @@ export default function RepositorySelector({
     <div className="mb-6">
       <div className="flex justify-between items-center mb-2">
         <div className="flex items-center gap-3">
-          <label htmlFor="repositories" className="block text-lg font-semibold text-gray-800">
+          <label
+            htmlFor="repositories"
+            className="block text-lg font-semibold text-gray-800 dark:text-gray-200"
+          >
             Repositories
           </label>
           <button
             type="button"
             onClick={onToggleExpanded}
-            className="text-sm text-gray-600 hover:text-gray-800 transition-colors cursor-pointer"
+            className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors cursor-pointer"
             disabled={loading}
           >
             {isExpanded ? "▼ Collapse" : "▶ Expand"}
           </button>
           {!isExpanded && (
-            <span className="text-sm text-gray-600">({selectedRepos.length} selected)</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">
+              ({selectedRepos.length} selected)
+            </span>
           )}
         </div>
         {isExpanded && (
@@ -58,7 +63,7 @@ export default function RepositorySelector({
             <button
               type="button"
               onClick={onUseDefaults}
-              className="px-4 py-2 text-sm bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-lg hover:bg-green-200 dark:hover:bg-green-900/50 transition-colors cursor-pointer"
               disabled={loading}
             >
               Use Defaults
@@ -66,7 +71,7 @@ export default function RepositorySelector({
             <button
               type="button"
               onClick={onSelectAll}
-              className="px-4 py-2 text-sm bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-lg hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors cursor-pointer"
               disabled={loading}
             >
               Select All
@@ -74,7 +79,7 @@ export default function RepositorySelector({
             <button
               type="button"
               onClick={onClearAll}
-              className="px-4 py-2 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
+              className="px-4 py-2 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-pointer"
               disabled={loading}
             >
               Clear
@@ -82,7 +87,9 @@ export default function RepositorySelector({
           </div>
         )}
       </div>
-      <p className="text-sm text-gray-600 mb-4">Select repositories to include in your search</p>
+      <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+        Select repositories to include in your search
+      </p>
 
       {isExpanded ? (
         <div className="space-y-4">

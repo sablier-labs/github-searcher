@@ -11,7 +11,10 @@ export default function SearchInput({ query, loading, onQueryChange }: SearchInp
   const queryId = useId();
   return (
     <div className="mb-6">
-      <label htmlFor={queryId} className="block text-lg font-semibold text-gray-800 mb-3">
+      <label
+        htmlFor={queryId}
+        className="block text-lg font-semibold text-gray-800 dark:text-gray-200 mb-3"
+      >
         Search Query
       </label>
       <div className="flex gap-3">
@@ -20,7 +23,7 @@ export default function SearchInput({ query, loading, onQueryChange }: SearchInp
           type="text"
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          className="flex-1 px-4 py-3 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-lg transition-all duration-300 ease-in-out"
+          className="flex-1 px-4 py-3 text-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:shadow-lg transition-all duration-300 ease-in-out placeholder-gray-500 dark:placeholder-gray-400"
           placeholder="Enter keywords: e.g., s'liquidity market', 'feature request'...'"
           disabled={loading}
         />

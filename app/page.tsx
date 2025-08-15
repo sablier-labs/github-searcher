@@ -64,7 +64,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+    <main className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 dark:from-slate-900 dark:to-slate-800">
       <div className="container mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-4 mb-4">
@@ -74,9 +74,11 @@ export default function Home() {
               width={48}
               height={48}
             />
-            <h1 className="text-4xl font-bold text-gray-900">Sablier GitHub Searcher</h1>
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100">
+              Sablier GitHub Searcher
+            </h1>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Search across all Sablier Labs issues and discussions on GitHub. Find conversations,
             feature requests, bug reports, and community discussions using keywords.
           </p>
@@ -84,12 +86,16 @@ export default function Home() {
 
         <SearchBar onSearch={handleSearch} loading={loading} />
 
-        {error && <div className="mt-6 p-4 bg-red-100 text-red-700 rounded-lg">{error}</div>}
+        {error && (
+          <div className="mt-6 p-4 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-lg">
+            {error}
+          </div>
+        )}
 
         <SearchResults ref={resultsRef} results={results} loading={loading} />
 
         {indexMetadata && (
-          <div className="mt-4 text-center text-sm text-gray-500">
+          <div className="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
             Data last indexed at: {dayjs(indexMetadata.buildTime).format("D MMM YYYY")} •{" "}
             {indexMetadata.counts.issues} issues • {indexMetadata.counts.discussions} discussions
           </div>
@@ -100,7 +106,7 @@ export default function Home() {
             href="https://github.com/sablier-labs/github-searcher"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-gray-600 hover:text-purple-600 transition-colors"
+            className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
           >
             <Image
               src="https://svgrepo.com/show/303615/github-icon-1-logo.svg"

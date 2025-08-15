@@ -6,7 +6,7 @@ export default function LoadingIndicator() {
         <div className="w-3 h-3 bg-[#ff9C00] rounded-full animate-bounce [animation-delay:-0.15s]"></div>
         <div className="w-3 h-3 bg-[#ffb800] rounded-full animate-bounce"></div>
       </div>
-      <p className="text-gray-600 text-sm">Searching repositories...</p>
+      <p className="text-gray-600 dark:text-gray-400 text-sm">Searching repositories...</p>
     </div>
   );
 }
