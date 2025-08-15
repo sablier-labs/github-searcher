@@ -22,6 +22,7 @@ jobs:
         uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.APP_ID }}
+          owner: ${{ github.repository_owner }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Fetch new data
