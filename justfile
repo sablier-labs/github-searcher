@@ -17,7 +17,7 @@ default:
 
 # Fetch the data from GitHub (issues and discussions)
 fetch-data:
-    GITHUB_TOKEN=$GITHUB_TOKEN na tsx cli/fetch-data.ts
+    na tsx cli/fetch-data.ts
 
 # Clean the .next directory
 clean:

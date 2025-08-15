@@ -8,10 +8,9 @@ on:
 jobs:
   update-data:
     permissions:
-      contents: read
+      contents: write
       issues: read
       discussions: read
-      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -25,12 +24,16 @@ jobs:
       - name: Fetch new data
         run: just fetch-data
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          body: "This PR updates the `github-data.json` file with the latest data from GitHub."
-          branch: "update-github-data"
-          commit-message: "chore(data): update github-data.json"
-          delete-branch: true
-          title: "Update github-data.json"
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate timestamps
+        id: timestamps
+        run: | # shell
+          echo "unix=$(date +%s)" >> $GITHUB_OUTPUT
+          echo "human=$(date '+%B %d, %Y')" >> $GITHUB_OUTPUT
+
+      - name: Commit changes
+        run: | # shell
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add public/github-data.json
+          git diff --staged --quiet || git commit -m "chore: update data - ${{ steps.timestamps.outputs.human }}"
+          git push
