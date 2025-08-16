@@ -29,13 +29,13 @@ const DISCUSSIONS_QUERY = `#graphql
           endCursor
         }
         nodes {
-          number
-          title
-          body
-          createdAt
-          updatedAt
-          url
           closed
+          createdAt
+          body
+          number
+          url
+          title
+          updatedAt
           author {
             login
           }
@@ -155,6 +155,16 @@ async function fetchData() {
   console.log("🚀 Starting index build...");
   const startTime = Date.now();
 
+  // Read previous data for comparison
+  let previousCounts = { discussions: 0, issues: 0 };
+  try {
+    const existingData = await fs.readFile(DATA_FILE, "utf-8");
+    const parsed = JSON.parse(existingData);
+    previousCounts = parsed.metadata?.counts || { discussions: 0, issues: 0 };
+  } catch {
+    console.log("📝 No previous data found, starting fresh");
+  }
+
   const [issues, discussions] = await Promise.all([fetchAllIssues(), fetchAllDiscussions()]);
 
   // biome-ignore assist/source/useSortedKeys: metadata at the top
@@ -176,6 +186,20 @@ async function fetchData() {
   console.log("\n📊 Data index statistics:");
   console.log(`  - Issues: ${issues.length}`);
   console.log(`  - Discussions: ${discussions.length}`);
+
+  // Show comparison with previous data
+  const issuesDiff = issues.length - previousCounts.issues;
+  const discussionsDiff = discussions.length - previousCounts.discussions;
+
+  if (previousCounts.issues > 0 || previousCounts.discussions > 0) {
+    console.log("\n📈 Changes since last update:");
+    console.log(
+      `  - Issues: ${issuesDiff >= 0 ? "+" : ""}${issuesDiff} (${previousCounts.issues} → ${issues.length})`,
+    );
+    console.log(
+      `  - Discussions: ${discussionsDiff >= 0 ? "+" : ""}${discussionsDiff} (${previousCounts.discussions} → ${discussions.length})`,
+    );
+  }
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
   console.log(`\n✨ Data index built successfully in ${elapsed}s`);
